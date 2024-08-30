@@ -1,52 +1,31 @@
-# songs-app-frontend
+# Songs App Frontend
 
-# React + TypeScript + Vite
+This is the frontend for the Songs App, a music application where users can browse, search, and play songs.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Major Libraries and Frameworks
 
-Currently, two official plugins are available:
+- **React.js**: JavaScript library for building user interfaces.
+- **Next.js**: React framework that enables server-side rendering and static site generation.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **Axios**: Promise-based HTTP client for the browser and Node.js.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Live Demo
 
-## Expanding the ESLint configuration
+The application is deployed on Vercel and can be accessed here: [Songs App](https://songs-app-client.vercel.app/)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Related Projects
 
-- Configure the top-level `parserOptions` property like this:
+- **API Repository**: [songs-api](https://github.com/zmekonnen251/songs-api)
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+## Setup Instructions
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. Clone the repository.
+2. Install dependencies using `yarn install`.
+3. Create a `.env` file based on `.env.example`.
+4. Run the application in development mode using `yarn dev`.
+5. Build the application using `yarn build`.
+6. Start the application using `yarn start`.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react';
+## License
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-});
-```
+This project is licensed under the ISC License.
