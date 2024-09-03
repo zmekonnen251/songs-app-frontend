@@ -1,6 +1,47 @@
 // styles.ts
 import { css, Theme } from '@emotion/react';
 
+export type PaperStyleProps = {
+  padding?: string;
+  margin?: string;
+  backgroundColor?: string;
+  borderRadius?: string;
+  shadow?: string;
+  theme: Theme;
+};
+
+export const paperStyle = (props: PaperStyleProps) => css`
+  padding: ${props.padding ?? '1rem'};
+  margin: ${props.margin ?? '0'};
+  background-color: ${props.backgroundColor ??
+  `rgba(${props.theme.colors.primary}, 0.1)`};
+  border-radius: ${props.borderRadius ?? '4px'};
+  box-shadow: ${props.shadow ?? '0 4px 6px rgba(0, 0, 0, 0.1)'};
+
+  @media (max-width: 600px) {
+    padding: ${props.padding ?? '0.5rem'};
+
+    border-radius: ${props.borderRadius ?? '2px'};
+    box-shadow: ${props.shadow ?? '0 2px 4px rgba(0, 0, 0, 0.1)'};
+  }
+`;
+
+export const headingStyle = (theme: Theme) => css`
+  color: ${theme.colors.primary};
+  font-size: 2rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  letter-spacing: 1px;
+  line-height: 1.5;
+  text-align: center;
+
+  @media (max-width: 600px) {
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+  }
+`;
+
 export const tableStyle = (theme: Theme) => css`
   width: 100%;
   border-collapse: collapse;
@@ -9,10 +50,10 @@ export const tableStyle = (theme: Theme) => css`
 
   th,
   td {
-    padding: ${theme.space[3]}px;
-    border: 1px solid ${theme.colors.secondary};
+    padding: ${theme.space[2]}px;
+    border: 1px solid ${theme.colors.text};
     text-align: left;
-    font-size: ${theme.fontSizes[2]}px;
+    font-size: ${theme.fontSizes[1]}px;
     font-family: 'Roboto', sans-serif;
     @media (max-width: 600px) {
       padding: 4px;
@@ -22,12 +63,10 @@ export const tableStyle = (theme: Theme) => css`
   th {
     background-color: ${theme.colors.background};
     font-weight: bold;
-    line-height: 44px;
     letter-spacing: 0.3em;
     font-size: ${theme.fontSizes[1]}px;
     @media (max-width: 600px) {
       padding: 4px;
-      line-height: 34px;
     }
   }
 `;
@@ -39,7 +78,7 @@ export const controlStyle = css`
   align-items: center;
 
   @media (max-width: 600px) {
-    flex-direction: column;
+    // flex-direction: column;
     gap: 8px;
   }
 `;
@@ -52,9 +91,9 @@ export const selectStyle = css`
   border-radius: 4px;
   background-color: #fff;
 
-  @media (max-width: 600px) {
-    width: 100%;
-  }
+  // @media (max-width: 600px) {
+  //   width: 100%;
+  // }
 `;
 
 export const actionsStyle = css`
@@ -78,11 +117,11 @@ export const statsGrid = css`
   }
 `;
 
-export const statsContainer = css`
+export const statsContainer = (theme: Theme) => css`
   margin-top: 16px;
-  background-color: #2c2c2c;
-  color: #fff;
-  padding: 24px;
+  background-color: ${theme.colors.background};
+  color: ${theme.colors.text};
+  padding: 10px;
   border-radius: 8px;
 `;
 

@@ -23,6 +23,7 @@ const paginationContainer = (theme: Theme) => css`
   border-top: 1px solid ${theme.colors.secondary};
   background-color: ${theme.colors.background};
   margin-bottom: 16px;
+  flex-wrap: wrap;
 `;
 
 const perPageSelectorStyle = (theme: Theme) => css`

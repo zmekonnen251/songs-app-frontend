@@ -1,12 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import Input from './ui/Input';
-import Button from './ui/Button';
 import { controlStyle, selectStyle } from '@/styles/styles';
-import { BiPlus } from 'react-icons/bi';
 
 interface FilterControlsProps {
-  title: string;
   genre: string;
   artist: string;
   album: string;
@@ -16,11 +12,9 @@ interface FilterControlsProps {
   onFilterChange: (
     e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>,
   ) => void;
-  onCreateSong: () => void;
 }
 
 const FilterControls: React.FC<FilterControlsProps> = ({
-  title,
   genre,
   artist,
   album,
@@ -28,17 +22,16 @@ const FilterControls: React.FC<FilterControlsProps> = ({
   artists,
   albums,
   onFilterChange,
-  onCreateSong,
 }) => {
   return (
     <div css={controlStyle}>
-      <Input
+      {/* <Input
         type="text"
         placeholder="Search by title..."
         name="title"
         value={title}
         onChange={onFilterChange}
-      />
+      /> */}
       <select
         css={selectStyle}
         name="genre"
@@ -78,10 +71,6 @@ const FilterControls: React.FC<FilterControlsProps> = ({
           </option>
         ))}
       </select>
-      <Button onClick={onCreateSong} variant="success">
-        <BiPlus size={24} />
-        Create
-      </Button>
     </div>
   );
 };

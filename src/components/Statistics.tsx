@@ -17,7 +17,6 @@ import {
 const Statistics: React.FC = () => {
   const stats = useSelector((state: RootState) => state.songs.stats);
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch({
       type: actions.FETCH_STATS,

@@ -4,10 +4,13 @@ This is the frontend for the Songs App, a music application where users can brow
 
 ## Major Libraries and Frameworks
 
-- **React.js**: JavaScript library for building user interfaces.
-- **Next.js**: React framework that enables server-side rendering and static site generation.
-- **Tailwind CSS**: Utility-first CSS framework for styling.
-- **Axios**: Promise-based HTTP client for the browser and Node.js.
+- **React.js**: A JavaScript library for building user interfaces.
+- **Vite**: A fast development build tool for modern web projects.
+- **Emotion**: A library for writing CSS styles with JavaScript.
+- **Redux Toolkit**: A powerful library for managing state in React applications.
+- **Axios**: A promise-based HTTP client for the browser and Node.js.
+- **React Router**: A library for handling navigation in React applications.
+- **Styled System**: A utility for creating responsive UI components.
 
 ## Live Demo
 

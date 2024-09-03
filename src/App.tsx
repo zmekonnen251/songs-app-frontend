@@ -8,14 +8,16 @@ import { useSelector } from 'react-redux';
 import { RootState } from './store';
 import { globalStyles } from './styles/styles';
 import Header from './components/Header';
+import Divider from './components/ui/Divider';
 
 const App: React.FC = () => {
   const isDark = useSelector((state: RootState) => state.theme.isDark);
-
+  const theme = isDark ? darkTheme : lightTheme;
+  const [searchTerm, setSearchTerm] = React.useState('');
   const dynamicStyles = css`
     body {
-      background-color: ${isDark ? '#333' : '#f4f4f4'};
-      color: ${isDark ? '#f4f4f4' : '#333'};
+      background-color: ${theme.colors.background};
+      color: ${theme.colors.text};
     }
 
     /* Other dynamic styles based on theme */
@@ -24,10 +26,10 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <Global styles={[globalStyles, dynamicStyles]} />
-      <Header />
-
+      <Header setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+      <Divider height="10px" />
       <Statistics />
-      <SongList />
+      <SongList searchTerm={searchTerm} />
     </ThemeProvider>
   );
 };

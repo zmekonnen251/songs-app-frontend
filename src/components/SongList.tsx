@@ -11,8 +11,9 @@ import { tableStyle } from '@/styles/styles';
 import FilterControls from './FilterControls';
 import { useTheme } from '@emotion/react';
 import ActionsCell from './ActionsCell';
+import Divider from './ui/Divider';
 
-const SongList: React.FC = () => {
+const SongList = ({ searchTerm }: { searchTerm: string }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const songs = useSelector((state: RootState) => state.songs.songs);
@@ -31,7 +32,6 @@ const SongList: React.FC = () => {
   const [genre, setGenre] = useState<string>('');
   const [artist, setArtist] = useState<string>('');
   const [album, setAlbum] = useState<string>('');
-  const [title, setTitle] = useState('');
 
   useEffect(() => {
     dispatch({
@@ -42,18 +42,13 @@ const SongList: React.FC = () => {
         genre,
         artist,
         album,
-        title,
+        title: searchTerm,
       },
     });
-  }, [dispatch, currentPage, genre, artist, album, title, perPage]);
+  }, [dispatch, currentPage, genre, artist, album, searchTerm, perPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-  };
-
-  const handleCreateSong = () => {
-    setSelectedSong(null);
-    setModalOpen(true);
   };
 
   const handleEditSong = (song: Song) => {
@@ -76,11 +71,22 @@ const SongList: React.FC = () => {
     if (name === 'genre') setGenre(value);
     if (name === 'artist') setArtist(value);
     if (name === 'album') setAlbum(value);
-    if (name === 'title') setTitle(value);
   };
 
   return (
     <>
+      <Divider height="10px" />
+      <FilterControls
+        genre={genre}
+        artist={artist}
+        album={album}
+        genres={genres}
+        artists={artists}
+        albums={albums}
+        onFilterChange={handleFilterChange}
+      />
+      <Divider height="10px" />
+
       <table css={tableStyle(theme)}>
         <thead>
           <tr>
@@ -90,48 +96,51 @@ const SongList: React.FC = () => {
             <th>Genre</th>
             <th>Actions</th>
           </tr>
-          <tr>
-            <td colSpan={5}>
-              <FilterControls
-                title={title}
-                genre={genre}
-                artist={artist}
-                album={album}
-                genres={genres}
-                artists={artists}
-                albums={albums}
-                onFilterChange={handleFilterChange}
-                onCreateSong={handleCreateSong}
-              />
-            </td>
-          </tr>
         </thead>
         <tbody>
-          {songs.map((song) => (
-            <tr key={song._id}>
-              <td>{song.title}</td>
-              <td>{song.artist}</td>
-              <td>{song.album}</td>
-              <td>{song.genre}</td>
-              <td>
-                <ActionsCell
-                  song={song}
-                  handleDeleteSong={handleDeleteSong}
-                  handleEditSong={handleEditSong}
-                />
+          {songs.length === 0 && (
+            <tr>
+              <td colSpan={5}>
+                <p
+                  css={{
+                    textAlign: 'center',
+                    padding: theme.space[3],
+                  }}
+                >
+                  No songs found
+                </p>
               </td>
             </tr>
-          ))}
+          )}
+
+          {songs.length > 0 &&
+            songs.map((song) => (
+              <tr key={song._id}>
+                <td>{song.title}</td>
+                <td>{song.artist}</td>
+                <td>{song.album}</td>
+                <td>{song.genre}</td>
+                <td>
+                  <ActionsCell
+                    song={song}
+                    handleDeleteSong={handleDeleteSong}
+                    handleEditSong={handleEditSong}
+                  />
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
 
-      <Pagination
-        currentPage={currentPage}
-        totalItems={totalSongs}
-        itemsPerPage={perPage}
-        onPageChange={handlePageChange}
-        onPerPageChange={handlePerPageChange}
-      />
+      {songs.length > 0 && totalSongs > perPage && (
+        <Pagination
+          currentPage={currentPage}
+          totalItems={totalSongs}
+          itemsPerPage={perPage}
+          onPageChange={handlePageChange}
+          onPerPageChange={handlePerPageChange}
+        />
+      )}
 
       {isModalOpen && (
         <Modal
